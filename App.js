@@ -17,7 +17,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
+import RNBootSplash from 'react-native-bootsplash';
 import {
   Colors,
   DebugInstructions,
@@ -53,6 +53,7 @@ const Section = ({children, title}): Node => {
 };
 
 const App: () => Node = () => {
+  RNBootSplash.hide({fade: true});
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
