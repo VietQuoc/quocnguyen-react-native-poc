@@ -1,4 +1,4 @@
-package com.poc;
+package com.quocnguyen.poc;
 
 import com.facebook.react.ReactActivity;
 
