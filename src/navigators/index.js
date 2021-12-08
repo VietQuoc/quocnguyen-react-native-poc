@@ -11,7 +11,9 @@ const Stack = createNativeStackNavigator()
 
 export default function RootNavigator() {
   const [isCheckedApp, setIsCheckedApp] = useState(false)
-  if (!isCheckedApp) return <LaunchScreenContainer setIsCheckedApp={setIsCheckedApp} />
+  if (!isCheckedApp) {
+    return <LaunchScreenContainer setIsCheckedApp={setIsCheckedApp} />
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator>

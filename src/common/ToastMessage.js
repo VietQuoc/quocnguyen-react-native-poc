@@ -3,7 +3,7 @@ import Toast, { BaseToast } from 'react-native-toast-message'
 import Icon from 'react-native-vector-icons/Feather'
 import { View, StyleSheet } from 'react-native'
 import { useNetInfo } from '@react-native-community/netinfo'
-import useTheme from '../themes'
+import { useTheme } from '../themes'
 
 export function ToastMessage() {
   const netInfo = useNetInfo()

@@ -1,6 +1,7 @@
-import useTheme from '../themes'
+import { useTheme, Dimensions } from '../themes'
 import React from 'react'
 import { View, ActivityIndicator, StyleSheet, Image, Text } from 'react-native'
+import { useLanguage } from '../config/Strings'
 
 export default function LaunchScreenContainer() {
   return <LaunchScreenLoading />
@@ -8,6 +9,7 @@ export default function LaunchScreenContainer() {
 
 function LaunchScreenLoading() {
   const styles = useStyle()
+  const Strings = useLanguage()
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -18,7 +20,7 @@ function LaunchScreenLoading() {
       </View>
       <View style={styles.activityContainer}>
         <ActivityIndicator color={styles.activityColor} size="large" />
-        <Text style={styles.text}>Dữ Liệu Đang Được Cập Nhật!</Text>
+        <Text style={styles.text}>{Strings.dataAreBeingUpdated}!</Text>
       </View>
     </View>
   )
@@ -40,6 +42,10 @@ function useStyle() {
       alignItems: 'center',
     },
     imageContainer: { flex: 2, justifyContent: 'center', alignItems: 'center' },
-    image: { width: 100, height: 100, tintColor: colors.text },
+    image: {
+      width: Dimensions.openAppLogo,
+      height: Dimensions.openAppLogo,
+      tintColor: colors.text,
+    },
   })
 }

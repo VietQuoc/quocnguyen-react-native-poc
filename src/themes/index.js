@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { singletonHook } from 'react-singleton-hook'
 import { lightTheme, darkTheme } from './colors'
+import Dimensions from './dimensions'
 
 const useTheme = singletonHook([lightTheme], () => {
   const [colors, setColors] = useState(lightTheme)
   const themeID = useSelector((state) => state.app.themeID)
   useEffect(() => {
     if (themeID !== null) {
-      console.log('changeThemeID')
       switch (themeID) {
         case 0:
           setColors(lightTheme)
@@ -22,8 +22,7 @@ const useTheme = singletonHook([lightTheme], () => {
       }
     }
   }, [themeID])
-  console.log('useTheme')
   return [colors]
 })
 
-export default useTheme
+export { useTheme, Dimensions }

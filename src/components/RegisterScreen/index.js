@@ -2,14 +2,13 @@ import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { setThemeID } from '../../store/actions/index'
-import useTheme from '../../themes'
+import { useTheme } from '../../themes'
 
 export default function RegisterScreen() {
   const dispatch = useDispatch()
   const themeID = useSelector((state) => state.app.themeID)
   const styles = useStyle()
   function changeTheme() {
-    console.log('click')
     dispatch(setThemeID(Math.abs(themeID - 1)))
   }
   return (
