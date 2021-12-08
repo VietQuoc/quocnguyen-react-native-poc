@@ -1,4 +1,5 @@
 export const lightTheme = {
+  statusBarStyle: 'dark-content',
   primary: 'rgb(107, 0, 189)',
   background: 'rgb(248, 250, 255)',
   card: 'rgb(255, 255, 255)',
@@ -7,9 +8,11 @@ export const lightTheme = {
   error: 'rgb(232,63,60)',
   button: 'rgb(172,161,212)',
   buttonBackground: 'rgb(219,217,239)',
+  androidStatusBar: '#1A1125',
 }
 
 export const darkTheme = {
+  statusBarStyle: 'light-content',
   primary: '#5B04BC',
   background: '#1A1125',
   card: '#261D32',
@@ -18,4 +21,5 @@ export const darkTheme = {
   error: 'rgb(232,63,60)',
   button: 'rgb(172,161,212)',
   buttonBackground: 'rgb(219,217,239)',
+  androidStatusBar: '#1A1125',
 }

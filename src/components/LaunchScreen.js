@@ -35,7 +35,7 @@ function useStyle() {
       backgroundColor: colors.background,
     },
     activityColor: colors.primary,
-    text: { marginTop: 20, color: colors.text },
+    text: { marginTop: 20, color: colors.text, fontSize: Dimensions.fontSize },
     activityContainer: {
       flex: 1,
       justifyContent: 'center',

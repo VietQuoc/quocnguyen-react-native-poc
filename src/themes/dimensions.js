@@ -9,4 +9,5 @@ export default {
   deviceWidth,
   fontSize: 12 * scale,
   openAppLogo: 100 * scale,
+  loginAppLogoWidth: 150 * scale,
 }
