@@ -28,5 +28,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/state-in-constructor': 'off',
     'array-callback-return': 'off',
+    'react-hooks/exhaustive-deps': 'off',
   },
 }

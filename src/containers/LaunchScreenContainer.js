@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
-import { View, Text } from 'react-native'
-import RNBootSplash from 'react-native-bootsplash'
+import LaunchScreen from '../components/LaunchScreen'
 
-export default function LaunchScreenContainer() {
+export default function LaunchScreenContainer({ setIsCheckedApp }) {
   useEffect(() => {
-    RNBootSplash.hide({ fade: true })
+    checkAppStatus()
   }, [])
 
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>LaunchScreenContainer</Text>
-    </View>
-  )
+  function checkAppStatus() {
+    setTimeout(() => {
+      setIsCheckedApp(true)
+    }, 1000)
+  }
+
+  return <LaunchScreen checkAppStatus={checkAppStatus} />
 }
