@@ -1,5 +1,5 @@
 package com.quocnguyen.poc;
-
+import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate; // <- add this necessary import
 import com.zoontek.rnbootsplash.RNBootSplash; // <- add this necessary import
@@ -23,5 +23,10 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "poc";
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
   }
 }
