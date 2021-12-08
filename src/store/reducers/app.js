@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 import initState from '../initState'
-import { setAppMessage, setIsProcessing, reset } from '../actions'
+import { setAppMessage, setIsProcessing, reset, setThemeID } from '../actions'
 
 export default handleActions(
   {
@@ -15,6 +15,10 @@ export default handleActions(
     [reset]: (state) => ({
       ...state,
       ...initState.app,
+    }),
+    [setThemeID]: (state, { payload: { themeID } }) => ({
+      ...state,
+      themeID,
     }),
   },
   initState.app,

@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import RNBootSplash from 'react-native-bootsplash'
 import RootNavigator from './navigators'
 import { store, persistor } from './store'
+import { SingletonHooksContainer } from 'react-singleton-hook'
 
 export default function App() {
   useEffect(() => {
@@ -15,6 +16,7 @@ export default function App() {
     <SafeAreaProvider>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+          <SingletonHooksContainer />
           <RootNavigator />
         </PersistGate>
       </Provider>

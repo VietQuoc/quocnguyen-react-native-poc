@@ -1,10 +1,9 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import LoginScreen from '../components/LoginScreen'
 
-export default function LoginContainer() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>LoginContainer</Text>
-    </View>
-  )
+export default function LoginContainer({ navigation }) {
+  function navigateToRegisterScreen() {
+    navigation.navigate('RegisterContainer')
+  }
+  return <LoginScreen navigateToRegisterScreen={navigateToRegisterScreen} />
 }
