@@ -50,7 +50,7 @@ TextBox.propTypes = {
   onChangeText: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   iconName: PropTypes.string,
-  passwordControl: PropTypes.bool,
+  passwordControl: PropTypes.bool, // true if it is password textbox
 }
 TextBox.defaultProps = {
   style: {},
@@ -60,7 +60,7 @@ TextBox.defaultProps = {
 }
 
 function useStyle() {
-  const [colors] = useTheme()
+  const colors = useTheme()
   return StyleSheet.create({
     container: {
       borderBottomWidth: 1,

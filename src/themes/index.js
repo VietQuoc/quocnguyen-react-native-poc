@@ -4,7 +4,7 @@ import { singletonHook } from 'react-singleton-hook'
 import { lightTheme, darkTheme } from './colors'
 import Dimensions from './dimensions'
 
-const useTheme = singletonHook([lightTheme], () => {
+const useTheme = singletonHook(lightTheme, () => {
   const [colors, setColors] = useState(lightTheme)
   const themeID = useSelector((state) => state.app.themeID)
   useEffect(() => {
@@ -22,7 +22,7 @@ const useTheme = singletonHook([lightTheme], () => {
       }
     }
   }, [themeID])
-  return [colors]
+  return colors
 })
 
 export { useTheme, Dimensions }

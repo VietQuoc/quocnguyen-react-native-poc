@@ -12,7 +12,7 @@ export function ToastMessage() {
       notifyErrorToastMessage('Bạn đang offline.')
     }
   }, [netInfo])
-  const [colors] = useTheme()
+  const colors = useTheme()
   const toastConfig = {
     error: ({ props, ...rest }) => (
       <BaseToast

@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import LaunchScreenContainer from '../containers/LaunchScreenContainer'
-import HomeMainNavigator from './HomeMainNavigator'
 import { ToastMessage } from '../common/component/ToastMessage'
-import LoginContainer from '../containers/LoginContainer'
-import RegisterContainer from '../containers/RegisterContainer'
+import {
+  LoginContainer,
+  LaunchScreenContainer,
+  RegisterContainer,
+  HomeContainer,
+  SettingContainer,
+} from '../containers'
 
 const Stack = createNativeStackNavigator()
 
@@ -27,11 +30,8 @@ export default function RootNavigator() {
           component={RegisterContainer}
           options={{ headerShown: true }}
         />
-        <Stack.Screen
-          name="HomeMainNavigator"
-          component={HomeMainNavigator}
-          options={{ headerShown: false }}
-        />
+        <Stack.Screen name="HomeContainer" component={HomeContainer} />
+        <Stack.Screen name="SettingContainer" component={SettingContainer} />
       </Stack.Navigator>
       <ToastMessage />
     </NavigationContainer>

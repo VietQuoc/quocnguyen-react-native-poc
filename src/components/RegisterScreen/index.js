@@ -25,7 +25,7 @@ export default function RegisterScreen() {
 }
 
 function useStyle() {
-  const [colors] = useTheme()
+  const colors = useTheme()
   return StyleSheet.create({
     container: {
       flex: 1,
