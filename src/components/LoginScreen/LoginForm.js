@@ -1,15 +1,16 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import AppButton from '../../common/component/AppButton'
+import LinkText from '../../common/component/LinkText'
+import TextBox from '../../common/component/TextBox'
 import { useLanguage } from '../../config/Strings'
 import { setThemeID, setLanguageID } from '../../store/actions/index'
-import { useTheme, Dimensions } from '../../themes'
 
 export default function LoginForm({ navigateToRegisterScreen }) {
   const dispatch = useDispatch()
   const themeID = useSelector((state) => state.app.themeID)
   const languageID = useSelector((state) => state.app.languageID)
-  const styles = useStyle()
   const language = useLanguage()
   function changeTheme() {
     dispatch(setThemeID(Math.abs(themeID - 1)))
@@ -17,22 +18,38 @@ export default function LoginForm({ navigateToRegisterScreen }) {
   }
   return (
     <View style={styles.loginForm}>
-      <TouchableOpacity onPress={() => changeTheme()}>
-        <Text style={styles.text}>Change Theme</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={navigateToRegisterScreen}>
-        <Text style={styles.text}>Register</Text>
-      </TouchableOpacity>
+      <TextBox
+        placeholder={language.email}
+        style={styles.emailTextBox}
+        onChangeText={(a) => console.log(a)}
+      />
+      <TextBox
+        placeholder={language.password}
+        onChangeText={(a) => console.log(a)}
+        iconName="lock"
+        passwordControl
+      />
+      <AppButton
+        onPress={() => {}}
+        title={language.login}
+        style={styles.loginButton}
+      />
+      <LinkText
+        title={language.createNewAccount}
+        onPress={navigateToRegisterScreen}
+      />
+      <LinkText title="Change Theme" onPress={() => changeTheme()} />
     </View>
   )
 }
 
-function useStyle() {
-  const [colors] = useTheme()
-  return StyleSheet.create({
-    text: { color: colors.text, fontSize: Dimensions.fontSize },
-    loginForm: {
-      flex: 1,
-    },
-  })
-}
+const styles = StyleSheet.create({
+  loginForm: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  emailTextBox: {
+    marginBottom: 20,
+  },
+  loginButton: { marginTop: 30 },
+})
