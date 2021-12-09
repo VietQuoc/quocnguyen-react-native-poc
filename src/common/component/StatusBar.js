@@ -16,7 +16,6 @@ function useStyle() {
   const colors = useTheme()
   return StyleSheet.create({
     statusBarStyle: colors.statusBarStyle,
-    statusBarBackgroundColor:
-      Platform.OS === 'android' ? colors.androidStatusBar : colors.background,
+    statusBarBackgroundColor: colors.background,
   })
 }

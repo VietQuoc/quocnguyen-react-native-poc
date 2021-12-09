@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native'
 import AppButton from '../../common/component/AppButton'
 import LinkText from '../../common/component/LinkText'
 import TextBox from '../../common/component/TextBox'
@@ -11,27 +11,27 @@ export default function LoginForm({
   navigateToHomeScreen,
 }) {
   const language = useLanguage()
-  const orientation = useOrientation()
+  const styles = useStyles()
   return (
     <ScrollView
-      style={[
-        styles.container,
-        orientation === 'landscape' ? styles.landscapeHeight : {},
-      ]}
-      scrollEnabled={orientation === 'landscape'}
+      style={styles.container}
+      scrollEnabled={styles.scrollEnabled}
       contentContainerStyle={styles.loginForm}
       nestedScrollEnabled>
-      <TextBox
-        placeholder={language.email}
-        style={styles.emailTextBox}
-        onChangeText={(a) => console.log(a)}
-      />
-      <TextBox
-        placeholder={language.password}
-        onChangeText={(a) => console.log(a)}
-        iconName="lock"
-        passwordControl
-      />
+      <KeyboardAvoidingView behavior="padding" enabled>
+        <TextBox
+          placeholder={language.email}
+          style={styles.emailTextBox}
+          onChangeText={(a) => console.log(a)}
+        />
+        <TextBox
+          placeholder={language.password}
+          onChangeText={(a) => console.log(a)}
+          iconName="lock"
+          passwordControl
+        />
+      </KeyboardAvoidingView>
+
       <AppButton
         onPress={navigateToHomeScreen}
         title={language.login}
@@ -45,14 +45,21 @@ export default function LoginForm({
   )
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  loginForm: {
-    alignItems: 'center',
-  },
-  emailTextBox: {
-    marginBottom: 20,
-  },
-  loginButton: { marginTop: 30 },
-  landscapeHeight: { height: '100%' },
-})
+function useStyles() {
+  const orientation = useOrientation()
+  console.log(orientation)
+  return StyleSheet.create({
+    container: { flex: 1 },
+    loginForm: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: orientation === 'landscape' ? 'center' : 'flex-start',
+    },
+    emailTextBox: {
+      marginBottom: 20,
+    },
+    loginButton: { marginTop: 30 },
+    landscapeHeight: { height: '100%' },
+    scrollEnabled: orientation === 'landscape',
+  })
+}

@@ -17,7 +17,11 @@ export default function LoginHeader() {
 function useStyle() {
   const colors = useTheme()
   return StyleSheet.create({
-    imageContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+    imageContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginVertical: 40,
+    },
     image: {
       width: Dimensions.loginAppLogoWidth,
       height: Dimensions.loginAppLogoWidth,

@@ -63,7 +63,7 @@ function useStyle() {
   const colors = useTheme()
   return StyleSheet.create({
     container: {
-      borderBottomWidth: 1,
+      borderBottomWidth: 1.5,
       borderColor: colors.button,
       flexDirection: 'row',
       alignItems: 'center',
