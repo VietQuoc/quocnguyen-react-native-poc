@@ -2,5 +2,5 @@ import React from 'react'
 import RegisterScreen from '../components/RegisterScreen'
 
 export default function RegisterContainer({ navigation }) {
-  return <RegisterScreen />
+  return <RegisterScreen navigation={navigation} />
 }
