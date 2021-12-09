@@ -13,7 +13,7 @@ export default function StatusBar() {
 }
 
 function useStyle() {
-  const [colors] = useTheme()
+  const colors = useTheme()
   return StyleSheet.create({
     statusBarStyle: colors.statusBarStyle,
     statusBarBackgroundColor:

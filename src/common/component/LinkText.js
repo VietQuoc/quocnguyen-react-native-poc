@@ -21,7 +21,7 @@ LinkText.defaultProps = {
 }
 
 function useStyle() {
-  const [colors] = useTheme()
+  const colors = useTheme()
   return StyleSheet.create({
     container: {
       padding: 10,

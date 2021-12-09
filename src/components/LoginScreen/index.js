@@ -1,24 +1,36 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useTheme } from '../../themes'
+import { useOrientation } from '../../themes/dimensions'
 import LoginForm from './LoginForm'
 import LoginHeader from './LoginHeader'
 
-export default function LoginScreen({ navigateToRegisterScreen }) {
+export default function LoginScreen({
+  navigateToRegisterScreen,
+  navigateToHomeScreen,
+}) {
   const styles = useStyle()
+  const orientation = useOrientation()
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
+      <ScrollView
+        scrollEnabled={orientation === 'portrait'}
+        contentContainerStyle={styles.container}
+        nestedScrollEnabled>
         <LoginHeader />
-        <LoginForm navigateToRegisterScreen={navigateToRegisterScreen} />
-      </View>
+        <LoginForm
+          navigateToRegisterScreen={navigateToRegisterScreen}
+          navigateToHomeScreen={navigateToHomeScreen}
+        />
+      </ScrollView>
     </SafeAreaView>
   )
 }
 
 function useStyle() {
-  const [colors] = useTheme()
+  const colors = useTheme()
+  const orientation = useOrientation()
   return StyleSheet.create({
     safeArea: {
       flex: 1,
@@ -28,7 +40,7 @@ function useStyle() {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: colors.background,
+      flexDirection: orientation === 'landscape' ? 'row' : 'column',
     },
   })
 }
