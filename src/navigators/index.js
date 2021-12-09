@@ -28,7 +28,7 @@ export default function RootNavigator() {
         <Stack.Screen
           name="RegisterContainer"
           component={RegisterContainer}
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen name="HomeContainer" component={HomeContainer} />
         <Stack.Screen name="SettingContainer" component={SettingContainer} />
