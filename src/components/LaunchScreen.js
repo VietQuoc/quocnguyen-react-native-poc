@@ -4,10 +4,6 @@ import { View, ActivityIndicator, StyleSheet, Image, Text } from 'react-native'
 import { useLanguage } from '../config/Strings'
 
 export default function LaunchScreenContainer() {
-  return <LaunchScreenLoading />
-}
-
-function LaunchScreenLoading() {
   const styles = useStyle()
   const Strings = useLanguage()
   return (
@@ -25,6 +21,7 @@ function LaunchScreenLoading() {
     </View>
   )
 }
+
 function useStyle() {
   const [colors] = useTheme()
   return StyleSheet.create({

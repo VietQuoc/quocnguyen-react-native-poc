@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import LaunchScreenContainer from '../containers/LaunchScreenContainer'
 import HomeMainNavigator from './HomeMainNavigator'
-import { ToastMessage } from '../common/ToastMessage'
+import { ToastMessage } from '../common/component/ToastMessage'
 import LoginContainer from '../containers/LoginContainer'
 import RegisterContainer from '../containers/RegisterContainer'
 

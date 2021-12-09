@@ -6,6 +6,7 @@ import RNBootSplash from 'react-native-bootsplash'
 import RootNavigator from './navigators'
 import { store, persistor } from './store'
 import { SingletonHooksContainer } from 'react-singleton-hook'
+import StatusBar from './common/component/StatusBar'
 
 export default function App() {
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function App() {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <SingletonHooksContainer />
+          <StatusBar />
           <RootNavigator />
         </PersistGate>
       </Provider>
