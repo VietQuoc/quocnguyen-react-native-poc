@@ -7,6 +7,7 @@ import RootNavigator from './navigators'
 import { store, persistor } from './store'
 import { SingletonHooksContainer } from 'react-singleton-hook'
 import StatusBar from './common/component/StatusBar'
+import ActivityScreen from './components/ActivityScreen'
 
 export default function App() {
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function App() {
           <SingletonHooksContainer />
           <StatusBar />
           <RootNavigator />
+          <ActivityScreen />
         </PersistGate>
       </Provider>
     </SafeAreaProvider>

@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native'
+import { useDispatch } from 'react-redux'
 import AppButton from '../../common/component/AppButton'
 import TextBox from '../../common/component/TextBox'
 import {
@@ -9,6 +10,7 @@ import {
 } from '../../common/function/validator'
 import { useLanguage } from '../../config/Strings'
 import { listenAuth } from '../../services/Firebase/FirebaseAuth'
+import { registerWithFirebase } from '../../store/actions/auth'
 import { Dimensions, useTheme } from '../../themes'
 import { useOrientation } from '../../themes/dimensions'
 import RegisterValidatorMessage from './RegisterValidatorMessage'
@@ -17,7 +19,15 @@ function withRegisterFormHook(Component) {
   return function WrappedComponent(props) {
     const language = useLanguage()
     const styles = useStyles()
-    return <Component {...props} language={language} styles={styles} />
+    const dispatch = useDispatch()
+    return (
+      <Component
+        {...props}
+        language={language}
+        styles={styles}
+        dispatch={dispatch}
+      />
+    )
   }
 }
 
@@ -34,7 +44,11 @@ class RegisterForm extends React.Component {
   }
 
   validator = () => {
-    console.log('ok')
+    this.props.dispatch(
+      registerWithFirebase(this.state.email, this.state.password, (result) => {
+        console.log(result)
+      }),
+    )
   }
 
   onEndEditEmail = (text) => {

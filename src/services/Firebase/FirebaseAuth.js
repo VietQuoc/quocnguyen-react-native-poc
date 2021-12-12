@@ -5,34 +5,31 @@ export function listenAuth() {
 }
 
 function onAuthStateChanged(user) {
-  console.log(user)
+  console.log('onAuthStateChanged: ', user)
 }
 
 export async function registerNewAccount(email, password) {
-  const result = await auth().createUserWithEmailAndPassword(email, password)
-  console.log(result)
-  // .then(() => {
-  //   console.log('User account created & signed in!')
-  // })
-  // .catch((error) => {
-  //   if (error.code === 'auth/email-already-in-use') {
-  //     console.log('That email address is already in use!')
-  //   }
-
-  //   if (error.code === 'auth/invalid-email') {
-  //     console.log('That email address is invalid!')
-  //   }
-
-  //   console.error(error)
-  // })
+  return new Promise((resolve, reject) => {
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        resolve({ pass: true, result: result })
+      })
+      .catch((error) => {
+        reject({
+          pass: false,
+          message: error.message.replace(/\[(.*?)\]/g, ''),
+        })
+      })
+  })
 }
 
 export async function loginWithEmailAndPassword(email, password) {
   const result = await auth().signInWithEmailAndPassword(email, password)
-  console.log(result)
+  return result
 }
 
 export async function logout() {
   const result = await auth().signOut()
-  console.log(result)
+  return result
 }
