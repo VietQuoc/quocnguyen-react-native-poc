@@ -9,20 +9,24 @@ const useTheme = singletonHook(lightTheme, () => {
   const themeID = useSelector((state) => state.app.themeID)
   useEffect(() => {
     if (themeID !== null) {
-      switch (themeID) {
-        case 0:
-          setColors(lightTheme)
-          break
-        case 1:
-          setColors(darkTheme)
-          break
-        default:
-          setColors(lightTheme)
-          break
-      }
+      const theme = getTheme(themeID)
+      setColors(theme)
     }
   }, [themeID])
   return colors
 })
 
-export { useTheme, Dimensions }
+function getTheme(themeID) {
+  if (themeID !== null) {
+    switch (themeID) {
+      case 0:
+        return lightTheme
+      case 1:
+        return darkTheme
+      default:
+        return lightTheme
+    }
+  }
+}
+
+export { useTheme, getTheme, Dimensions }

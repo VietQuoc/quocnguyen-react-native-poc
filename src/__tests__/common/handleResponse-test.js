@@ -28,7 +28,7 @@ each([
       },
     },
     {
-      pass: true,
+      type: 0,
       result: {
         additionalUserInfo: {
           isNewUser: true,
@@ -79,7 +79,7 @@ each([
         uid: 'zoM0oAe4CgP5G4jnAtZdbtDwm9t1',
       },
     },
-    { pass: false },
+    { type: 2 },
   ],
   [
     false,
@@ -89,7 +89,7 @@ each([
         '[auth/email-already-in-use] The email address is already in use by another account.',
     },
     {
-      pass: false,
+      type: 1,
       message: ' The email address is already in use by another account.',
     },
   ],
@@ -101,7 +101,7 @@ each([
         '[auth/email-already-in-use] The email address is already in use by another account.',
     },
     {
-      pass: true,
+      type: 0,
       result: {
         code: 'auth/email-already-in-use',
         message:
@@ -109,7 +109,7 @@ each([
       },
     },
   ],
-  [null, null, { pass: false }],
+  [null, null, { type: 2 }],
 ]).test(
   'validate handleFirebaseAuthResponse function should work correctly with multi input',
   (pass, result, validate) => {

@@ -9,7 +9,19 @@ const {
   setAppUser,
 } = createActions(
   {
-    SET_APP_MESSAGE: (appMessage) => ({ appMessage }),
+    SET_APP_MESSAGE: [
+      (appMessage) => ({ appMessage }),
+      (appMessage, callback) => ({ callback }),
+    ] /*
+    {
+      // app message show to inform, error
+      type: 0, // 0: inform, 1: error
+      content: {
+        title: '',
+        message: '',
+      },
+      callBack: '', // function to call
+    } */,
     SET_IS_PROCESSING: (isProcessing) => ({ isProcessing }),
     RESET: () => ({}),
     SET_THEME_I_D: (themeID) => ({ themeID }),

@@ -5,7 +5,10 @@ const { registerWithFirebase, loginWithFirebase, singOutOnFirebase } =
     {
       registerWithFirebase: [
         (email, password) => ({ email, password }),
-        (email, password, callback) => ({ callback }),
+        (email, password, callback, retryCallback) => ({
+          callback,
+          retryCallback,
+        }),
       ],
       loginWithFirebase: [
         (email, password) => ({ email, password }),

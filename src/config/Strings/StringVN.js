@@ -12,4 +12,12 @@ export default {
   passwordError:
     'Password phải từ 6 tới 20 ký tự và chứa ít nhất một số, một từ viết hoa và một từ viết thuờng!',
   retypeError: 'Nhập lại chưa chính xác!',
+  success: 'Thành Công',
+  registerSuccessPleaseLogin: 'Đăng Ký Thánh Công, Vui Lòng Đăng Nhập!',
+  logoutSuccess: 'Đã Đăng Xuất Thành Công',
+  failure: 'Thất Bại',
+  anUnknowError: 'Lỗi Không Xác Định',
+  ok: 'Đồng Ý',
+  retry: 'Thử Lại',
+  cancel: 'Hủy',
 }

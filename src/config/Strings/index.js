@@ -9,20 +9,22 @@ const useLanguage = singletonHook(VietNamese, () => {
   const languageID = useSelector((state) => state.app.languageID)
   useEffect(() => {
     if (languageID !== null) {
-      switch (languageID) {
-        case 0:
-          setLanguage(VietNamese)
-          break
-        case 1:
-          setLanguage(English)
-          break
-        default:
-          setLanguage(VietNamese)
-          break
-      }
+      const result = getLanguage(languageID)
+      setLanguage(result)
     }
   }, [languageID])
   return language
 })
 
-export { useLanguage }
+function getLanguage(languageID) {
+  switch (languageID) {
+    case 0:
+      return VietNamese
+    case 1:
+      return English
+    default:
+      return VietNamese
+  }
+}
+
+export { useLanguage, getLanguage }
