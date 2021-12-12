@@ -19,9 +19,6 @@ export default function RegisterScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <RegisterHeader navigation={navigation} />
       <RegisterForm navigation={navigation} />
-      <TouchableOpacity onPress={() => changeTheme()}>
-        <Text>Change Theme</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   )
 }

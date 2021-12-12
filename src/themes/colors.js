@@ -11,6 +11,7 @@ export const lightTheme = {
   androidStatusBar: '#1A1125',
   placeholder: 'rgb(172,161,212)',
   backButton: '#000000',
+  spinnerBg: 'rgba(52, 52, 52, 0.3)',
 }
 
 export const darkTheme = {
@@ -26,4 +27,5 @@ export const darkTheme = {
   androidStatusBar: '#1A1125',
   placeholder: 'rgb(172,161,212)',
   backButton: 'rgb(219,217,239)',
+  spinnerBg: 'rgba(52, 52, 52, 0.3)',
 }

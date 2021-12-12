@@ -10,6 +10,7 @@ export default function TextBox({
   placeholder,
   iconName,
   passwordControl,
+  innerRef,
   ...props
 }) {
   const styles = useStyle()
@@ -22,6 +23,7 @@ export default function TextBox({
         color={styles.iconColor}
       />
       <TextInput
+        ref={innerRef}
         autoCorrect={false}
         maxLength={80}
         style={styles.inputTextBox}
@@ -46,8 +48,8 @@ export default function TextBox({
   )
 }
 TextBox.propTypes = {
-  style: PropTypes.object,
-  onChangeText: PropTypes.func.isRequired,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  onChangeText: PropTypes.func,
   placeholder: PropTypes.string,
   iconName: PropTypes.string,
   passwordControl: PropTypes.bool, // true if it is password textbox
@@ -57,6 +59,7 @@ TextBox.defaultProps = {
   placeholder: '',
   iconName: 'user',
   passwordControl: false,
+  onChangeText: () => {},
 }
 
 function useStyle() {
