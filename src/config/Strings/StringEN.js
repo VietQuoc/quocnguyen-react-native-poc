@@ -12,4 +12,12 @@ export default {
   passwordError:
     'Passwords must be between 6 to 20 characters and contain at least one numeric digit, one uppercase and one lowercase letter!',
   retypeError: 'Re-enter is incorrect!',
+  success: 'Success',
+  registerSuccessPleaseLogin: 'Registered successfully, please login!',
+  logoutSuccess: 'Successfully Logged Out',
+  failure: 'Failure',
+  anUnknowError: 'An Unknow Error',
+  ok: 'OK',
+  retry: 'Retry',
+  cancel: 'Cancel',
 }

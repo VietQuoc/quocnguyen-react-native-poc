@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { Root as MessageRoot } from 'react-native-popup-confirm-toast'
 import RNBootSplash from 'react-native-bootsplash'
 import RootNavigator from './navigators'
 import { store, persistor } from './store'
@@ -20,7 +21,9 @@ export default function App() {
         <PersistGate loading={null} persistor={persistor}>
           <SingletonHooksContainer />
           <StatusBar />
-          <RootNavigator />
+          <MessageRoot>
+            <RootNavigator />
+          </MessageRoot>
           <ActivityScreen />
         </PersistGate>
       </Provider>

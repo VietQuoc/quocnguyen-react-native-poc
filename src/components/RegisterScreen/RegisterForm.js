@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native'
 import { useDispatch } from 'react-redux'
 import AppButton from '../../common/component/AppButton'
@@ -9,7 +9,6 @@ import {
   validatePassword,
 } from '../../common/function/validator'
 import { useLanguage } from '../../config/Strings'
-import { listenAuth } from '../../services/Firebase/FirebaseAuth'
 import { registerWithFirebase } from '../../store/actions/auth'
 import { Dimensions, useTheme } from '../../themes'
 import { useOrientation } from '../../themes/dimensions'
@@ -44,10 +43,19 @@ class RegisterForm extends React.Component {
   }
 
   validator = () => {
+    console.log('call validator')
     this.props.dispatch(
-      registerWithFirebase(this.state.email, this.state.password, (result) => {
-        console.log(result)
-      }),
+      registerWithFirebase(
+        this.state.email,
+        this.state.password,
+        () => {
+          this.props.navigation.goBack()
+        },
+        () => {
+          console.log('thử lại')
+          this.validator()
+        },
+      ),
     )
   }
 
