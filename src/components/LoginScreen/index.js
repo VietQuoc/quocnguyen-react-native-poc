@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useTheme } from '../../themes'
 import { useOrientation } from '../../themes/dimensions'
@@ -11,19 +11,13 @@ export default function LoginScreen({
   navigateToHomeScreen,
 }) {
   const styles = useStyle()
-  const orientation = useOrientation()
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView
-        scrollEnabled={orientation === 'portrait'}
-        contentContainerStyle={styles.container}
-        nestedScrollEnabled>
-        <LoginHeader />
-        <LoginForm
-          navigateToRegisterScreen={navigateToRegisterScreen}
-          navigateToHomeScreen={navigateToHomeScreen}
-        />
-      </ScrollView>
+      <LoginHeader />
+      <LoginForm
+        navigateToRegisterScreen={navigateToRegisterScreen}
+        navigateToHomeScreen={navigateToHomeScreen}
+      />
     </SafeAreaView>
   )
 }
@@ -35,9 +29,6 @@ function useStyle() {
     safeArea: {
       flex: 1,
       backgroundColor: colors.background,
-    },
-    container: {
-      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: orientation === 'landscape' ? 'row' : 'column',

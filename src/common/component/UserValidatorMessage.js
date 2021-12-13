@@ -4,15 +4,16 @@ import PropTypes from 'prop-types'
 import { Dimensions, useTheme } from '../../themes'
 import { useLanguage } from '../../config/Strings'
 
-export default function RegisterValidatorMessage({
+export default function UserValidatorMessage({
   emailError,
   passwordError,
   retypeError,
+  style,
 }) {
   const styles = useStyle()
   const language = useLanguage()
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       {emailError && <Text style={styles.text}>{language.emailError}</Text>}
       {passwordError && (
         <Text style={styles.text}>{language.passwordError}</Text>
@@ -22,15 +23,17 @@ export default function RegisterValidatorMessage({
   )
 }
 
-RegisterValidatorMessage.propTypes = {
+UserValidatorMessage.propTypes = {
   emailError: PropTypes.bool,
   passwordError: PropTypes.bool,
   retypeError: PropTypes.bool,
+  style: PropTypes.object,
 }
-RegisterValidatorMessage.defaultProps = {
+UserValidatorMessage.defaultProps = {
   emailError: false,
   passwordError: false,
   retypeError: false,
+  style: {},
 }
 
 function useStyle() {

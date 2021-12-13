@@ -23,6 +23,7 @@
     "react": "17.0.2",
     "react-native": "0.66.3",
     "react-native-bootsplash": "^4.0.2",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-popup-confirm-toast": "^2.0.3",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.0",

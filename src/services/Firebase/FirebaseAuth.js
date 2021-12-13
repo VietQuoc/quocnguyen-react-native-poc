@@ -1,12 +1,14 @@
 import auth from '@react-native-firebase/auth'
 import { handleFirebaseAuthResponse } from '../../common/function/handleResponse'
 
-export function listenAuth() {
-  auth().onAuthStateChanged(onAuthStateChanged)
+export function listenAuth(callback) {
+  auth().onAuthStateChanged((user) => onAuthStateChanged(user, callback))
 }
 
-function onAuthStateChanged(user) {
-  console.log('onAuthStateChanged: ', user)
+function onAuthStateChanged(user, callback) {
+  if (callback) {
+    callback(user)
+  }
 }
 
 export async function registerNewAccount(email, password) {
@@ -23,8 +25,16 @@ export async function registerNewAccount(email, password) {
 }
 
 export async function loginWithEmailAndPassword(email, password) {
-  const result = await auth().signInWithEmailAndPassword(email, password)
-  return result
+  return new Promise((resolve, reject) => {
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        resolve(handleFirebaseAuthResponse(true, result))
+      })
+      .catch((error) => {
+        reject(handleFirebaseAuthResponse(false, error))
+      })
+  })
 }
 
 export async function logout() {
