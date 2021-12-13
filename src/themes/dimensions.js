@@ -22,6 +22,7 @@ export default {
   textBoxWidthFull: 250 * scaleFull,
   headerHeight: 30 * scale,
   headerBackWidth: 60 * scale,
+  keyboardPadding: 160 * scale,
 }
 
 export const useOrientation = singletonHook('portrait', () => {

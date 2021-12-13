@@ -20,7 +20,6 @@ export function* showAppMessageFlow(result, apiType, callback, retryCallback) {
   const language = getLanguage(languageID)
   const message = getFirebaseAppMessage(apiType, result, language)
   try {
-    console.log('vào đây: ', result)
     if (result) {
       switch (result.type) {
         case 0: // pass
@@ -70,32 +69,18 @@ export function* showAppMessageFlow(result, apiType, callback, retryCallback) {
           }
           break
         case 2: // error
-          Popup.show({
-            type: 'danger',
-            title: message.title,
-            textBody: message.textBody,
-            buttonText: language.ok,
-            okButtonStyle: { backgroundColor: colors.primary },
-            callback: () => {
-              Popup.hide()
-            },
-          })
+          showUnknowError()
           break
         default:
-          Popup.show({
-            type: 'danger',
-            title: message.title,
-            textBody: message.textBody,
-            buttonText: language.ok,
-            okButtonStyle: { backgroundColor: colors.primary },
-            callback: () => {
-              Popup.hide()
-            },
-          })
+          showUnknowError()
           break
       }
     }
   } catch (error) {
+    showUnknowError()
+  }
+
+  function showUnknowError() {
     Popup.show({
       type: 'danger',
       title: message.title,

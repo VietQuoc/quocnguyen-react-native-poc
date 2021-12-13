@@ -1,8 +1,10 @@
 import React from 'react'
-import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useDispatch } from 'react-redux'
 import AppButton from '../../common/component/AppButton'
 import TextBox from '../../common/component/TextBox'
+import UserValidatorMessage from '../../common/component/UserValidatorMessage'
 import {
   validateEmail,
   validateEqualString,
@@ -12,7 +14,6 @@ import { useLanguage } from '../../config/Strings'
 import { registerWithFirebase } from '../../store/actions/auth'
 import { Dimensions, useTheme } from '../../themes'
 import { useOrientation } from '../../themes/dimensions'
-import RegisterValidatorMessage from './RegisterValidatorMessage'
 
 function withRegisterFormHook(Component) {
   return function WrappedComponent(props) {
@@ -43,20 +44,26 @@ class RegisterForm extends React.Component {
   }
 
   validator = () => {
-    console.log('call validator')
-    this.props.dispatch(
-      registerWithFirebase(
-        this.state.email,
+    if (
+      this.validateConfirmEmail(this.state.email, this.state.confirmEmail) &&
+      this.validateConfirmPassword(
         this.state.password,
-        () => {
-          this.props.navigation.goBack()
-        },
-        () => {
-          console.log('thử lại')
-          this.validator()
-        },
-      ),
-    )
+        this.state.confirmPassword,
+      )
+    ) {
+      this.props.dispatch(
+        registerWithFirebase(
+          this.state.email,
+          this.state.password,
+          () => {
+            this.props.navigation.goBack()
+          },
+          () => {
+            this.validator()
+          },
+        ),
+      )
+    }
   }
 
   onEndEditEmail = (text) => {
@@ -76,81 +83,92 @@ class RegisterForm extends React.Component {
     }
   }
   onEndEditConfirmEmail = (text) => {
-    const isCorrect = validateEqualString(this.state.email, text)
-    this.setState({ isConfirmEmailCorrect: isCorrect ? 1 : 0 })
+    this.validateConfirmEmail(this.state.email, text)
+  }
+  validateConfirmEmail = (email, confirmEmail) => {
+    const isCorrect = validateEqualString(email, confirmEmail)
+    this.setState({
+      isConfirmEmailCorrect: isCorrect ? 1 : 0,
+      confirmEmail: confirmEmail,
+    })
+    return isCorrect
   }
   onEndEditConfirmPassword = (text) => {
-    const isCorrect = validateEqualString(this.state.password, text)
-    this.setState({ isConfirmPasswordCorrect: isCorrect ? 1 : 0 })
+    this.validateConfirmPassword(this.state.password, text)
+  }
+  validateConfirmPassword = (password, confirmPassword) => {
+    const isCorrect = validateEqualString(password, confirmPassword)
+    this.setState({
+      isConfirmPasswordCorrect: isCorrect ? 1 : 0,
+      confirmPassword: confirmPassword,
+    })
+    return isCorrect
   }
 
   render() {
     const { language, styles } = this.props
     return (
-      <View style={styles.loginForm}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          keyboardVerticalOffset={0}>
-          <TextBox
-            placeholder={language.email}
-            style={[
-              styles.emailTextBox,
-              this.state.isCorrectEmail
-                ? styles.borderNormal
-                : styles.borderError,
-            ]}
-            onEndEditing={(event) =>
-              this.onEndEditEmail(event.nativeEvent.text)
-            }
-          />
-          <TextBox
-            placeholder={language.confirmEmail}
-            style={[
-              styles.emailTextBox,
-              this.state.isConfirmEmailCorrect
-                ? styles.borderNormal
-                : styles.borderError,
-            ]}
-            onEndEditing={(event) =>
-              this.onEndEditConfirmEmail(event.nativeEvent.text)
-            }
-          />
-          <TextBox
-            placeholder={language.password}
-            style={[
-              styles.emailTextBox,
-              this.state.isCorrectPassword
-                ? styles.borderNormal
-                : styles.borderError,
-            ]}
-            onEndEditing={(event) =>
-              this.onEndEditPassword(event.nativeEvent.text)
-            }
-            iconName="lock"
-            passwordControl
-          />
-          <TextBox
-            placeholder={language.confirmPassword}
-            style={[
-              styles.emailTextBox,
-              this.state.isConfirmPasswordCorrect
-                ? styles.borderNormal
-                : styles.borderError,
-            ]}
-            onEndEditing={(event) =>
-              this.onEndEditConfirmPassword(event.nativeEvent.text)
-            }
-            iconName="lock"
-            passwordControl
-          />
-        </KeyboardAvoidingView>
-        <RegisterValidatorMessage
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.registerForm}>
+        <TextBox
+          placeholder={language.email}
+          style={[
+            styles.textBox,
+            this.state.isCorrectEmail
+              ? styles.borderNormal
+              : styles.borderError,
+          ]}
+          onEndEditing={(event) => this.onEndEditEmail(event.nativeEvent.text)}
+        />
+        <TextBox
+          placeholder={language.confirmEmail}
+          style={[
+            styles.textBox,
+            this.state.isConfirmEmailCorrect
+              ? styles.borderNormal
+              : styles.borderError,
+          ]}
+          onEndEditing={(event) =>
+            this.onEndEditConfirmEmail(event.nativeEvent.text)
+          }
+        />
+        <TextBox
+          placeholder={language.password}
+          style={[
+            styles.textBox,
+            this.state.isCorrectPassword
+              ? styles.borderNormal
+              : styles.borderError,
+          ]}
+          onEndEditing={(event) =>
+            this.onEndEditPassword(event.nativeEvent.text)
+          }
+          iconName="lock"
+          passwordControl
+        />
+        <TextBox
+          placeholder={language.confirmPassword}
+          style={[
+            styles.textBox,
+            this.state.isConfirmPasswordCorrect
+              ? styles.borderNormal
+              : styles.borderError,
+          ]}
+          onEndEditing={(event) =>
+            this.onEndEditConfirmPassword(event.nativeEvent.text)
+          }
+          iconName="lock"
+          passwordControl
+        />
+        <UserValidatorMessage
           emailError={this.state.isCorrectEmail === 0}
           passwordError={this.state.isCorrectPassword === 0}
           retypeError={
             this.state.isConfirmEmailCorrect === 0 ||
             this.state.isConfirmPasswordCorrect === 0
           }
+          style={styles.appErrorMessage}
         />
         <AppButton
           disabled={
@@ -163,9 +181,9 @@ class RegisterForm extends React.Component {
           }
           onPress={this.validator}
           title={language.createAccount}
-          style={styles.loginButton}
+          style={styles.registerButton}
         />
-      </View>
+      </KeyboardAwareScrollView>
     )
   }
 }
@@ -176,23 +194,22 @@ function useStyles() {
   const orientation = useOrientation()
   const colors = useTheme()
   return StyleSheet.create({
-    loginForm: {
-      flex: 1,
+    registerForm: {
       alignItems: 'center',
-      justifyContent: orientation === 'landscape' ? 'center' : 'flex-start',
-      paddingTop: Dimensions.fontSizeSmall,
+      justifyContent: 'center',
     },
-    emailTextBox: {
-      marginBottom: Dimensions.fontSizeSmall,
+    textBox: {
+      marginTop: Dimensions.fontSizeLarge,
       width:
         orientation === 'landscape'
           ? Dimensions.textBoxWidthFull
           : Dimensions.textBoxWidth,
     },
-    loginButton: { marginTop: Dimensions.fontSizeSmall },
+    registerButton: { marginTop: Dimensions.fontSizeLarge },
     landscapeHeight: { height: '100%' },
     scrollEnabled: orientation === 'landscape',
     borderNormal: { borderBottomColor: colors.border },
     borderError: { borderBottomColor: colors.error },
+    appErrorMessage: { marginTop: Dimensions.fontSizeLarge },
   })
 }
